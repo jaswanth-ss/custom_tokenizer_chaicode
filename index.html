@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Tokenizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Custom Tokenizer</h1>
+
+        <main>
+            <div class="input-group">
+                <label for="mainInput">Input</label>
+                <input id="mainInput" type="text" placeholder="Enter text or tokens" autocomplete="off" />
+            </div>
+
+            <div class="button-group">
+                <button class="btn" onclick="handleEncode()">Encode</button>
+                <button class="btn" onclick="handleDecode()">Decode</button>
+                <button class="btn btn-muted" onclick="handleClear()">Clear</button>
+            </div>
+
+            <section class="result-section">
+                <div class="result-box">
+                    <h3>Encoded Tokens</h3>
+                    <div id="encodedResult" class="result-content"></div>
+                </div>
+
+                <div class="result-box">
+                    <h3>Decoded Text</h3>
+                    <div id="decodedResult" class="result-content"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function handleEncode() {
+            const value = document.getElementById('mainInput').value;
+            if (!value.trim()) return;
+            try {
+                const tokens = encode(value);
+                document.getElementById('encodedResult').textContent = tokens.join(', ');
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        function handleDecode() {
+            const value = document.getElementById('mainInput').value;
+            if (!value.trim()) return;
+            try {
+                const tokens = value.split(',').map(t => parseInt(t.trim(), 10)).filter(n => !isNaN(n));
+                if (tokens.length === 0) return;
+                const text = decode(tokens);
+                document.getElementById('decodedResult').textContent = text;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        function handleClear() {
+            document.getElementById('mainInput').value = '';
+            document.getElementById('encodedResult').textContent = '';
+            document.getElementById('decodedResult').textContent = '';
+        }
+    </script>
+</body>
+</html>
