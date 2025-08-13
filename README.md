@@ -1,4 +1,4 @@
-### [Custom Tokenizer](custom-tokenizer-chaicode.vercel.app)
+### [Custom Tokenizer](https://custom-tokenizer-chaicode.vercel.app/)
 
 A web app that encodes text into integer tokens and decodes token sequences back to text using a simple, custom scheme.
 
